@@ -21,24 +21,46 @@ var library = {
                       tracks: ["t03"]
                     }
              },
-  printPlaylists = function () {
-    var libLists = this['playlists'];
-    // console.log(libLists);
+  printPlaylists: function () {
+          var libLists = this.playlists;
 
-    for (let playlistName in libLists) {
-      // console.log(playlistName)
-      let fullItemInPlaylist = libLists[playlistName];
+          for (let playlistName in libLists) {
+            let fullItemInPlaylist = libLists[playlistName];
+            this.id = fullItemInPlaylist.id;
+            this.name = fullItemInPlaylist.name;
+            this.tracksX = fullItemInPlaylist.tracks;
 
-      // console.log(fullItemInPlaylist)
-      this.id = fullItemInPlaylist.id;
-      this.name = fullItemInPlaylist.name;
-      this.tracksX = fullItemInPlaylist.tracks;
+            console.log(`${this.id}: ${this.name} - ${this.tracksX.length} tracks`);
 
-      console.log(`${this.id}: ${this.name} - ${this.tracksX.length} tracks`);
+          }
+        },
+  printTracks: function () {
+          var trackLists = this.tracks;
 
-    }
-  }
-}
+          for (let trackListName in trackLists) {
+            let fullItemInTracklist = trackLists[trackListName];
+            this.trackId = fullItemInTracklist.id;
+            this.trackName = fullItemInTracklist.name;
+            this.trackArtist = fullItemInTracklist.artist;
+            this.trackAlbum = fullItemInTracklist.album;
+
+            console.log(`${this.trackId}: ${this.trackName} by ${this.trackArtist} (${this.trackAlbum})`);
+          }
+        },
+  printPlaylist: function (playlistId) {
+        let listName = this.playlists[playlistId].name;
+        let trackListName = this.playlists[playlistId].tracks;
+        // console.log(trackListName)
+        console.log(`${playlistId}: ${listName} - ${trackListName.length} tracks`);
+
+        for (let key of trackListName) {
+          let track = this.tracks[key];
+          console.log(`${track.id}: ${track.name} by ${track.artist} (${track.album})`);
+
+        }
+
+      }
+
 
 // FUNCTIONS TO IMPLEMENT:
 
@@ -47,7 +69,8 @@ var library = {
 // p02: Other Playlist - 1 tracks
 
 // var
-// printPlaylists();
+}
+// library.printPlaylists();
 
 
 // prints a list of all tracks, in the form:
@@ -55,24 +78,11 @@ var library = {
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 // t03: Four Thirty-Three by John Cage (Woodstock 1952)
 
-var printTracks = function () {
+// var
 
-  var trackLists = library.tracks;
 
-  for (let trackListName in trackLists) {
-    let fullItemInTracklist = trackLists[trackListName];
-    // console.log(fullItemInTracklist)
-    let trackId = fullItemInTracklist.id;
-    let trackName = fullItemInTracklist.name;
-    let trackArtist = fullItemInTracklist.artist;
-    let trackAlbum = fullItemInTracklist.album;
 
-    console.log(trackId + ": " + trackName + " by " + trackArtist + " (" + trackAlbum +")");
-  }
-
-}
-
-// printTracks();
+// library.printTracks();
 
 
 // prints a list of tracks for a given playlist, in the form:
@@ -80,23 +90,9 @@ var printTracks = function () {
 // t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 
-var printPlaylist = function (playlistId) {
-  // console.log(playlistId);
+// var
 
-  let listName = library.playlists[playlistId].name;
-  let trackListName = library.playlists[playlistId].tracks;
-  // console.log(trackListName)
-  console.log(playlistId + ": " + listName + " - " + trackListName.length + " tracks");
-
-  for (let key of trackListName) {
-    let track = library.tracks[key];
-    console.log(track.id +": " + track.name + " by " + track.artist + ' (' + track.album + ')');
-
-  }
-
-}
-
-// printPlaylist('p01');
+// library.printPlaylist('p01');
 
 // adds an existing track to an existing playlist
 
@@ -155,9 +151,9 @@ var addPlaylist = function (name) {
 
 }
 
-printPlaylists();
+// printPlaylists();
 
-addPlaylist('country boy');
+// addPlaylist('country boy');
 
 
 // STRETCH:
@@ -168,16 +164,16 @@ addPlaylist('country boy');
 
 var printSearchResults = function(query) {
 
-  var regex = new RegExp(query), 'gi')
-        var tracks = library.tracks;
+  // var regex = new RegExp(query), 'gi')
+  //       var tracks = library.tracks
 
-        for (var trackId in tracks) {
-          var track = tracks[trackId];
-          // Creating string out of the 3 values (name, artist, album)
-          var trackInfo = track.name + track.artist + track.album;
-          if ( !trackInfo.search(regex)=== -1) {
-            printTrack(trackId);
-          }
-        }
+  //       for (var trackId in tracks) {
+  //         var track = tracks[trackId];
+  //         // Creating string out of the 3 values (name, artist, album)
+  //         var trackInfo = track.name + track.artist + track.album;
+  //         if ( !trackInfo.search(regex)=== -1) {
+  //           printTrack(trackId);
+  //         }
+  //       }
 
 }
